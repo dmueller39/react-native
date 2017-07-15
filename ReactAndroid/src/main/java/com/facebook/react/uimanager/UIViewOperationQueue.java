@@ -577,7 +577,10 @@ public class UIViewOperationQueue {
    * subclass to support UIOperations not provided by UIViewOperationQueue.
    */
   protected void enqueueUIOperation(UIOperation operation) {
-    SoftAssertions.assertNotNull(operation);
+    SoftAssertions.assertCondition(
+      !UiThreadUtil.isOnUiThread(),
+      "Must be invoked from the native modules thread, not the main ui thread."
+    );
     mOperations.add(operation);
   }
 
