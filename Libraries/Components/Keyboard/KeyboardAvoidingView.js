@@ -37,8 +37,6 @@ type KeyboardChangeEvent = {
   easing?: string,
 };
 
-const viewRef = 'VIEW';
-
 /**
  * It is a component to solve the common problem of views that need to move out of the way of the virtual keyboard.
  * It can automatically adjust either its position or bottom padding based on the position of the keyboard.
@@ -159,7 +157,7 @@ const KeyboardAvoidingView = createReactClass({
           heightStyle = {height: this.frame.height - this.state.bottom, flex: 0};
         }
         return (
-          <View ref={viewRef} style={[style, heightStyle]} onLayout={this.onLayout} {...props}>
+          <View style={[style, heightStyle]} onLayout={this.onLayout} {...props}>
             {children}
           </View>
         );
@@ -169,7 +167,7 @@ const KeyboardAvoidingView = createReactClass({
         const { contentContainerStyle } = this.props;
 
         return (
-          <View ref={viewRef} style={style} onLayout={this.onLayout} {...props}>
+          <View style={style} onLayout={this.onLayout} {...props}>
             <View style={[contentContainerStyle, positionStyle]}>
               {children}
             </View>
@@ -179,14 +177,14 @@ const KeyboardAvoidingView = createReactClass({
       case 'padding':
         const paddingStyle = {paddingBottom: this.state.bottom};
         return (
-          <View ref={viewRef} style={[style, paddingStyle]} onLayout={this.onLayout} {...props}>
+          <View style={[style, paddingStyle]} onLayout={this.onLayout} {...props}>
             {children}
           </View>
         );
 
       default:
         return (
-          <View ref={viewRef} onLayout={this.onLayout} style={style} {...props}>
+          <View onLayout={this.onLayout} style={style} {...props}>
             {children}
           </View>
         );
